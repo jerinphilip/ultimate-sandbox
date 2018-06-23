@@ -10,13 +10,18 @@ class Meter:
         self.data.append(value)
         self.sum += value
         self.count += 1
+        
+    def avg(self):
+        val = float('inf') if not self.count else self.sum/self.count
+        return val
 
     def __str__(self):
-        val = float('inf') if not self.count else self.sum/self.count
-        return '{:.2f}'.format(val)
+        return '{:.2f}'.format(self.avg)
 
     def export(self):
         xs = range(1, len(self.data))
         ys = self.data
         d = {"t": xs, "y": ys}
         return pandas.DataFrame(d)
+    
+    
